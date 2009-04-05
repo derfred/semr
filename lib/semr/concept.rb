@@ -6,8 +6,10 @@ module Semr
       @name, @definition = name, definition
       @options = options
     end
-    
+
     def normalize(match)
+      return if match.nil?
+
       result = arrayify(match) 
       if @options[:normalize]
         normalizers = @options[:normalize]

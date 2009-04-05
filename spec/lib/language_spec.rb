@@ -188,5 +188,48 @@ module Semr
     it 'should support optional matches' do
       pending 'phrase find :something <:optional>'
     end
+
+    it 'should support non-adjacent optional matches' do
+      language = Language.create do |language|
+        concept :container, any_word
+        concept :object, any_word
+        phrase 'find <:object> in :container' do |object, container|
+          context[:object] = object
+          context[:container] = container
+        end
+      end
+
+      # optional adjective is not present
+      result = language.parse('find in world')
+      result[:object].should == nil
+      result[:container].should == 'world'
+
+      # optional adjective is present
+      result = language.parse('find joy in life')
+      result[:object].should == 'joy'
+      result[:container].should == 'life'
+    end
+
+    it "should support adjacent optional matches" do
+      pending
+      language = Language.create do |language|
+        concept :adjective, any_word
+        concept :word, any_word
+        phrase 'put the <:adjective> :word in the context' do |adjective, word|
+          context[:adjective] = adjective
+          context[:word] = word
+        end
+      end
+
+      # optional adjective is not present
+      result = language.parse('put the butter in the context')
+      result[:adjective].should == nil
+      result[:word].should == 'butter'
+
+      # optional adjective is present
+      result = language.parse('put the soft butter in the context')
+      result[:adjective].should == 'soft'
+      result[:word].should == 'butter'
+    end
   end
 end
