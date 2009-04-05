@@ -27,7 +27,7 @@ module Semr
           concept = all_concepts[symbol]
           concepts << concept
 
-          optional_concept_matcher = "(?<#{symbol}>#{concept.definition.to_regexp})?\\s?"
+          optional_concept_matcher = "((?<#{symbol}>#{concept.definition.to_regexp})\\s)?"
           phrase.gsub!(/\<:#{symbol}\>\s?/, optional_concept_matcher)
 
           concept_matcher = "(?<#{symbol}>#{concept.definition.to_regexp})"
@@ -38,7 +38,7 @@ module Semr
     end
 
     def handles?(statement)
-      match = regex.match(statement) 
+      match = regex.match(statement)
       !match.nil?
     end
 

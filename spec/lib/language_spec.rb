@@ -207,7 +207,6 @@ module Semr
     end
 
     it "should support adjacent optional matches" do
-      pending
       language = Language.create do |language|
         concept :adjective, any_word
         concept :word, any_word
