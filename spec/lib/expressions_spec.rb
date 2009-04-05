@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 module Semr
   describe Expressions do
-    extend Expressions
+    include Expressions
 
     it 'matches known words' do
       known_words = word('one', 'two')
