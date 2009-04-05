@@ -184,10 +184,6 @@ module Semr
       end
       language.parse("highlight events and feature documents")[:result].should == ['events', 'documents']
     end
-    
-    it 'should support optional matches' do
-      pending 'phrase find :something <:optional>'
-    end
 
     it 'should support non-adjacent optional matches' do
       language = Language.create do |language|
