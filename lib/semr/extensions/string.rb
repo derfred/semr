@@ -14,7 +14,7 @@ String.class_eval do
   end
   
   def to_regexp
-    Regexp.new to_s
+    Regexp.new Regexp.escape(to_s)
   end
   
   def ends_with?(substr)
